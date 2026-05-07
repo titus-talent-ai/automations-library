@@ -4,6 +4,8 @@ Internal documentation hub for the AI skill library at Titus Talent Strategies. 
 
 This repo contains documentation only. The skill code itself lives elsewhere.
 
+> **Public-page note**: this site is publicly accessible via GitHub Pages. Do not embed personal email addresses, Teams deep links, phone numbers, or any other contact mechanism that scrapers can abuse. The contribute CTA intentionally tells readers to find Koal inside the Titus Teams directory rather than offering a clickable link.
+
 ## What's in here
 
 ```

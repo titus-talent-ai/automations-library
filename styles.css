@@ -959,15 +959,37 @@ details[open] .tree-card__chevron { transform: rotate(180deg); }
   line-height: 1.55;
 }
 
-.contribute__cta .btn--primary {
-  background: var(--titus-yellow);
-  border-color: var(--titus-yellow);
-  color: var(--titus-black);
+.contribute__cta-handle {
+  font-weight: 400;
+  color: var(--titus-yellow);
 }
-.contribute__cta .btn--primary:hover {
-  background: #ffd61a;
-  border-color: #ffd61a;
-  color: var(--titus-black);
+
+.contribute__cta-aside {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+.contribute__cta-kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--titus-white);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.contribute__cta-arrow {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+}
+
+@media (max-width: 720px) {
+  .contribute__cta-aside { display: none; }
 }
 
 /* ============================================================
