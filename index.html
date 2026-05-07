@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
-  <meta name="description" content="Internal documentation hub for the Titus Talent Strategies AI skill library. What we've built, what's coming, and how to add to it.">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08090c">
+  <meta name="description" content="The internal AI skill library at Titus Talent Strategies. What our team has built, what's coming next, and how to add to it.">
   <meta name="robots" content="noindex,nofollow">
   <title>Titus Talent Strategies | AI Skill Library</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -26,6 +27,7 @@
           },
           fontFamily: {
             sans: ['Calibri', 'Carlito', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
           },
         }
       }
@@ -38,11 +40,21 @@
 
   <a href="#main" class="skip-link">Skip to content</a>
 
+  <div class="atmos" aria-hidden="true">
+    <canvas id="orb-canvas"></canvas>
+    <div class="atmos__grid"></div>
+    <div class="atmos__cursor-glow" id="cursor-glow"></div>
+    <div class="atmos__noise"></div>
+  </div>
+
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
   <nav class="topnav" aria-label="Page navigation">
     <div class="container topnav__inner">
-      <a href="#top" class="topnav__brand" aria-label="Titus Talent Strategies AI Skill Library, back to top">
+      <a href="#top" class="topnav__brand" aria-label="AI Skill Library, back to top">
         <span class="topnav__mark" aria-hidden="true"></span>
-        <span>AI Skill Library</span>
+        <span>Titus / AI Skill Library</span>
       </a>
       <ul class="topnav__links">
         <li><a href="#directory">Directory</a></li>
@@ -51,40 +63,82 @@
         <li><a href="#contribute">Contribute</a></li>
         <li><a href="#changelog">Changelog</a></li>
       </ul>
+      <div class="topnav__sys">System online</div>
     </div>
   </nav>
 
   <main id="main">
 
     <section id="top" class="hero" aria-labelledby="hero-title">
-      <div class="container hero__inner">
-        <p class="hero__eyebrow">Titus Talent Strategies, internal resource</p>
-        <h1 id="hero-title" class="hero__headline">AI Skill <b>Library</b></h1>
-        <p class="hero__tagline">
-          What the team has <b>built</b>. What's <b>coming</b> next. How to <b>add</b> your own.
-        </p>
-        <div class="hero__meta">
-          <span><span class="sr-only">Last updated </span>Updated May 7, 2026</span>
-          <span class="hero__meta-divider" aria-hidden="true"></span>
-          <span>Maintained by Koal Robson</span>
+      <div class="container hero__grid">
+        <div class="hero__main">
+          <div class="hero__eyebrow">
+            <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+            <span>v1.0.0 / Internal Resource / Titus Talent Strategies</span>
+          </div>
+          <h1 id="hero-title" class="hero__headline">
+            <span class="hero__headline-row">
+              <span class="hero__headline-word">AI</span>
+              <span class="hero__headline-word">Skill</span>
+            </span>
+            <span class="hero__headline-row">
+              <span class="hero__headline-word hero__headline-accent">Library</span>
+            </span>
+          </h1>
+          <p class="hero__tagline">
+            What the team has <b>built</b>. What's <b>coming</b> next. How to <b>add</b> your own.
+          </p>
+          <div class="hero__meta" aria-label="Page metadata">
+            <span><span class="hero__meta-key">DEPLOYED</span><span data-deployed>May 7, 2026</span></span>
+            <span class="hero__meta-divider" aria-hidden="true"></span>
+            <span><span class="hero__meta-key">MAINTAINER</span>Koal Robson</span>
+            <span class="hero__meta-divider" aria-hidden="true"></span>
+            <span><span class="hero__meta-key">TEAM</span>Titus Talent Strategies</span>
+          </div>
+          <div class="hero__cta-row">
+            <a class="btn btn--primary" href="#directory" data-magnetic data-cursor="hover">
+              Browse the directory <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="btn btn--ghost" href="#contribute" data-cursor="hover">Propose a skill</a>
+          </div>
         </div>
-        <div class="hero__cta-row">
-          <a class="btn btn--primary" href="#directory">
-            Browse the directory <span class="btn__arrow" aria-hidden="true">&rarr;</span>
-          </a>
-          <a class="btn btn--secondary" href="#contribute">Propose a skill</a>
-        </div>
+
+        <aside class="hero__panel" aria-label="Live system status">
+          <div class="hero__panel-title">
+            <span>System / Live</span>
+            <span class="hero__panel-status">Online</span>
+          </div>
+          <div class="hero__panel-rows">
+            <div class="hero__panel-row">
+              <span class="hero__panel-key">Skills live</span>
+              <span class="hero__panel-value" data-counter="skills-live">0</span>
+            </div>
+            <div class="hero__panel-row">
+              <span class="hero__panel-key">In roadmap</span>
+              <span class="hero__panel-value hero__panel-value--blue" data-counter="roadmap-count">0</span>
+            </div>
+            <div class="hero__panel-row">
+              <span class="hero__panel-key">Domains</span>
+              <span class="hero__panel-value hero__panel-value--white" data-counter="domain-count">6</span>
+            </div>
+            <div class="hero__panel-row">
+              <span class="hero__panel-key">Last update</span>
+              <span class="hero__panel-value hero__panel-value--white" style="font-size: 14px;" data-relative-update>just now</span>
+            </div>
+          </div>
+          <div class="hero__panel-foot" data-typewriter>// awaiting first skill registration_</div>
+        </aside>
       </div>
     </section>
 
     <section class="section intro" aria-labelledby="intro-title">
       <div class="container intro__grid">
-        <div>
-          <p class="intro__label">What this is</p>
-          <h2 id="intro-title" class="section__title" style="margin-top:12px;">A working catalog, not a manual.</h2>
+        <div data-reveal>
+          <p class="intro__label">// 00 / what this is</p>
+          <h2 id="intro-title" class="intro__heading">A working <b>catalog</b>, not a manual.</h2>
         </div>
-        <div class="intro__body">
-          <p>Skills are small, focused tools that extend Claude with the specific workflows we run inside Titus. Document creation, candidate evaluation, partner intelligence, and the pieces of operations that used to be manual.</p>
+        <div class="intro__body" data-reveal data-reveal-delay="2">
+          <p>Skills are small, focused tools that extend Claude with the specific workflows we run inside Titus. <strong>Document creation. Candidate evaluation. Partner intelligence.</strong> The pieces of operations that used to be manual.</p>
           <p>This page is the source of truth for what is live, what is coming, and how to ask for something new. If a skill is not listed here, it is not part of the supported library.</p>
         </div>
       </div>
@@ -92,67 +146,74 @@
 
     <section id="directory" class="section" aria-labelledby="directory-title">
       <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-reveal>
           <div class="section__head-text">
-            <p class="section__eyebrow">Skills directory</p>
+            <p class="section__eyebrow"><span class="section__eyebrow-num">// 01 /</span> Skills directory</p>
             <h2 id="directory-title" class="section__title">What's <b>live</b> right now.</h2>
-            <p class="section__subtitle">Grouped by domain. Each card lists the trigger phrases that activate the skill and a one-line summary of what it produces.</p>
+            <p class="section__subtitle">Grouped by domain. Each card lists trigger phrases that activate the skill and a one-line summary of what it produces.</p>
           </div>
-          <div id="directory-meta" class="hero__meta" aria-live="polite"></div>
+          <div class="section__head-aside" id="directory-meta" aria-live="polite">
+            <span class="section__head-aside-num" data-counter="skills-total">0</span>
+            <span>skills indexed</span>
+          </div>
         </header>
 
-        <div id="directory-filters" class="directory__filters" role="group" aria-label="Filter skills by domain"></div>
+        <div id="directory-filters" class="directory__filters" role="group" aria-label="Filter skills by domain" data-reveal data-reveal-delay="1"></div>
 
-        <div id="directory-content"></div>
+        <div id="directory-content" data-reveal data-reveal-delay="2"></div>
       </div>
     </section>
 
-    <section id="decision-trees" class="section" aria-labelledby="decision-trees-title" style="background: var(--bg-2);">
+    <section id="decision-trees" class="section" aria-labelledby="decision-trees-title">
       <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-reveal>
           <div class="section__head-text">
-            <p class="section__eyebrow">When skills overlap</p>
+            <p class="section__eyebrow"><span class="section__eyebrow-num">// 02 /</span> When skills overlap</p>
             <h2 id="decision-trees-title" class="section__title">Which one do I <b>use</b>?</h2>
             <p class="section__subtitle">Some skills look similar but produce different deliverables. These short comparisons settle the most common questions.</p>
           </div>
         </header>
 
-        <div id="decision-trees-content"></div>
+        <div id="decision-trees-content" data-reveal data-reveal-delay="1"></div>
       </div>
     </section>
 
-    <section id="roadmap" class="section roadmap" aria-labelledby="roadmap-title">
+    <section id="roadmap" class="section" aria-labelledby="roadmap-title">
       <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-reveal>
           <div class="section__head-text">
-            <p class="section__eyebrow">Roadmap</p>
+            <p class="section__eyebrow"><span class="section__eyebrow-num">// 03 /</span> Roadmap</p>
             <h2 id="roadmap-title" class="section__title">What's <b>coming</b> next.</h2>
-            <p class="section__subtitle">Skills in design, build, or testing. Dates are targets, not commitments. If something here would make your work easier sooner, say so.</p>
+            <p class="section__subtitle">Skills in design, build, or testing. Dates are targets, not commitments. If something here would unlock your work sooner, say so.</p>
+          </div>
+          <div class="section__head-aside">
+            <span class="section__head-aside-num" data-counter="roadmap-total">0</span>
+            <span>in flight</span>
           </div>
         </header>
 
-        <div id="roadmap-content"></div>
+        <div id="roadmap-content" data-reveal data-reveal-delay="1"></div>
       </div>
     </section>
 
     <section id="contribute" class="section" aria-labelledby="contribute-title">
       <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-reveal>
           <div class="section__head-text">
-            <p class="section__eyebrow">How to contribute</p>
+            <p class="section__eyebrow"><span class="section__eyebrow-num">// 04 /</span> How to contribute</p>
             <h2 id="contribute-title" class="section__title">Pitch a skill, get it <b>built</b>.</h2>
             <p class="section__subtitle">Anyone at Titus can build personal skills for their own use. Skills published to the library are reviewed, polished, and supported.</p>
           </div>
         </header>
 
         <div class="contribute__grid">
-          <article class="contribute-step">
+          <article class="contribute-step" data-reveal data-reveal-delay="1">
             <span class="contribute-step__num">01</span>
             <h3 class="contribute-step__title">Personal vs. team skills</h3>
             <p class="contribute-step__body">Build whatever helps you personally, no approval needed. The library is curated: skills here have to work reliably for more than one person.</p>
           </article>
 
-          <article class="contribute-step">
+          <article class="contribute-step" data-reveal data-reveal-delay="2">
             <span class="contribute-step__num">02</span>
             <h3 class="contribute-step__title">What makes a good candidate</h3>
             <ul class="contribute-step__list">
@@ -163,23 +224,23 @@
             </ul>
           </article>
 
-          <article class="contribute-step">
+          <article class="contribute-step" data-reveal data-reveal-delay="3">
             <span class="contribute-step__num">03</span>
             <h3 class="contribute-step__title">How to propose one</h3>
-            <p class="contribute-step__body">DM Koal in Slack with four things: the pain point, your current manual workflow, how often you do it, and who else would use it.</p>
+            <p class="contribute-step__body">Send Koal four things in Teams: the pain point, your current manual workflow, how often you do it, and who else would use it.</p>
           </article>
 
-          <article class="contribute-step">
+          <article class="contribute-step" data-reveal data-reveal-delay="4">
             <span class="contribute-step__num">04</span>
             <h3 class="contribute-step__title">What happens next</h3>
             <p class="contribute-step__body">Review within a week. If it's a fit, we scope, build, polish, and publish, with attribution. If not, you'll get a clear reason and any adjacent skill that already covers it.</p>
           </article>
         </div>
 
-        <div class="contribute__cta">
+        <div class="contribute__cta" data-reveal>
           <div class="contribute__cta-text">
             <h3>Got a recurring task that should be a <b>skill</b>?</h3>
-            <p>Inside Microsoft Teams, search for <b class="contribute__cta-handle">Koal Robson</b> and send a DM with the four things in step 03. The fastest path from manual to automated runs through this page.</p>
+            <p>Inside Microsoft Teams, search for <span class="contribute__cta-handle">Koal Robson</span> and send a DM with the four things in step 03. The fastest path from manual to automated runs through this page.</p>
           </div>
           <div class="contribute__cta-aside" aria-hidden="true">
             <span class="contribute__cta-kbd">Teams</span>
@@ -192,15 +253,15 @@
 
     <section id="changelog" class="section section--tight" aria-labelledby="changelog-title">
       <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-reveal>
           <div class="section__head-text">
-            <p class="section__eyebrow">Changelog</p>
+            <p class="section__eyebrow"><span class="section__eyebrow-num">// 05 /</span> Changelog</p>
             <h2 id="changelog-title" class="section__title">Recent <b>changes</b>.</h2>
             <p class="section__subtitle">Additions, updates, renames, and deprecations. Reverse chronological.</p>
           </div>
         </header>
 
-        <div id="changelog-content"></div>
+        <div id="changelog-content" data-reveal data-reveal-delay="1"></div>
       </div>
     </section>
 
@@ -210,369 +271,17 @@
     <div class="container footer__inner">
       <div class="footer__left">
         <span class="footer__mark" aria-hidden="true"></span>
-        <span>Built by Koal Robson, Titus Talent Strategies</span>
+        <span>Built by Koal Robson / Titus Talent Strategies / 2026</span>
       </div>
       <div class="footer__right">
+        <span class="footer__sys">System online</span>
         <span id="footer-updated">Updated May 7, 2026</span>
         <a href="#top">Back to top</a>
       </div>
     </div>
   </footer>
 
-  <script>
-    // ============================================================
-    // Domain configuration. Add a new entry here to introduce a new
-    // domain category. Order in this object controls render order.
-    // ============================================================
-    const DOMAIN_CONFIG = {
-      'document-creation':    { label: 'Document Creation' },
-      'candidate-evaluation': { label: 'Candidate Evaluation' },
-      'partner-intelligence': { label: 'Partner Intelligence' },
-      'skill-operations':     { label: 'Skill Operations' },
-      'automation':           { label: 'Automation' },
-      'internal-tools':       { label: 'Internal Tools' },
-    };
-
-    const STATUS_LABELS = {
-      live: 'Live',
-      beta: 'Beta',
-      deprecated: 'Deprecated',
-    };
-
-    const ROADMAP_PRIORITY_LABELS = {
-      high: 'High',
-      medium: 'Medium',
-      low: 'Low',
-    };
-
-    const CHANGELOG_TYPE_LABELS = {
-      launch: 'Launch',
-      added: 'Added',
-      updated: 'Updated',
-      renamed: 'Renamed',
-      deprecated: 'Deprecated',
-    };
-
-    // ============================================================
-    // Helpers
-    // ============================================================
-    const $ = (sel) => document.querySelector(sel);
-    const el = (tag, attrs = {}, children = []) => {
-      const node = document.createElement(tag);
-      for (const [k, v] of Object.entries(attrs)) {
-        if (k === 'class') node.className = v;
-        else if (k === 'html') node.innerHTML = v;
-        else if (k.startsWith('on') && typeof v === 'function') node.addEventListener(k.slice(2), v);
-        else if (v !== null && v !== undefined) node.setAttribute(k, v);
-      }
-      const kids = Array.isArray(children) ? children : [children];
-      for (const c of kids) {
-        if (c == null) continue;
-        node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
-      }
-      return node;
-    };
-
-    async function loadJSON(path) {
-      try {
-        const res = await fetch(path, { cache: 'no-cache' });
-        if (!res.ok) return [];
-        return await res.json();
-      } catch (e) {
-        console.warn(`Could not load ${path}:`, e);
-        return [];
-      }
-    }
-
-    function emptyState({ title, body }) {
-      const wrap = el('div', { class: 'empty' });
-      const icon = el('div', { class: 'empty__icon', html:
-        '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M10 6.5v4M10 13.5v.01"/></svg>'
-      });
-      wrap.appendChild(icon);
-      wrap.appendChild(el('p', { class: 'empty__title' }, title));
-      wrap.appendChild(el('p', { class: 'empty__body' }, body));
-      return wrap;
-    }
-
-    // ============================================================
-    // Skills directory
-    // ============================================================
-    function renderSkills(skills) {
-      const root = $('#directory-content');
-      const filtersRoot = $('#directory-filters');
-      const meta = $('#directory-meta');
-      root.innerHTML = '';
-      filtersRoot.innerHTML = '';
-      meta.innerHTML = '';
-
-      if (!skills.length) {
-        root.appendChild(emptyState({
-          title: 'No skills published yet.',
-          body: 'Skills will appear here as they ship. Check back, or DM Koal in Slack to nominate one for the team library.'
-        }));
-        return;
-      }
-
-      const liveCount = skills.filter(s => s.status === 'live').length;
-      meta.appendChild(el('span', {}, `${skills.length} ${skills.length === 1 ? 'skill' : 'skills'}, ${liveCount} live`));
-
-      // Group skills by domain
-      const byDomain = {};
-      for (const skill of skills) {
-        const d = skill.domain || 'internal-tools';
-        if (!byDomain[d]) byDomain[d] = [];
-        byDomain[d].push(skill);
-      }
-
-      // Filter chips
-      const allChip = el('button', { class: 'filter-chip', type: 'button', 'aria-pressed': 'true', 'data-domain': 'all' });
-      allChip.textContent = 'All';
-      allChip.appendChild(el('span', { class: 'filter-chip__count' }, String(skills.length)));
-      filtersRoot.appendChild(allChip);
-
-      for (const key of Object.keys(DOMAIN_CONFIG)) {
-        const items = byDomain[key];
-        if (!items || !items.length) continue;
-        const chip = el('button', { class: 'filter-chip', type: 'button', 'aria-pressed': 'false', 'data-domain': key });
-        chip.textContent = DOMAIN_CONFIG[key].label;
-        chip.appendChild(el('span', { class: 'filter-chip__count' }, String(items.length)));
-        filtersRoot.appendChild(chip);
-      }
-
-      const groupsWrap = el('div');
-      root.appendChild(groupsWrap);
-
-      function renderGroups(activeDomain) {
-        groupsWrap.innerHTML = '';
-        const orderedKeys = Object.keys(DOMAIN_CONFIG).filter(k => byDomain[k] && byDomain[k].length);
-        // Append unknown domains at end
-        for (const k of Object.keys(byDomain)) {
-          if (!orderedKeys.includes(k)) orderedKeys.push(k);
-        }
-        const keysToRender = activeDomain === 'all'
-          ? orderedKeys
-          : orderedKeys.filter(k => k === activeDomain);
-
-        for (const domainKey of keysToRender) {
-          const items = byDomain[domainKey];
-          const label = (DOMAIN_CONFIG[domainKey] && DOMAIN_CONFIG[domainKey].label) || domainKey;
-          const group = el('div', { class: 'domain-group' });
-          const head = el('div', { class: 'domain-group__head' }, [
-            el('h3', { class: 'domain-group__title' }, label),
-            el('span', { class: 'domain-group__count' }, `${items.length} ${items.length === 1 ? 'skill' : 'skills'}`),
-          ]);
-          group.appendChild(head);
-
-          const grid = el('div', { class: 'skill-grid' });
-          for (const skill of items) {
-            grid.appendChild(renderSkillCard(skill));
-          }
-          group.appendChild(grid);
-          groupsWrap.appendChild(group);
-        }
-      }
-
-      filtersRoot.addEventListener('click', (e) => {
-        const btn = e.target.closest('.filter-chip');
-        if (!btn) return;
-        for (const c of filtersRoot.querySelectorAll('.filter-chip')) {
-          c.setAttribute('aria-pressed', c === btn ? 'true' : 'false');
-        }
-        renderGroups(btn.dataset.domain);
-      });
-
-      renderGroups('all');
-    }
-
-    function renderSkillCard(skill) {
-      const status = (skill.status || 'live').toLowerCase();
-      const card = el('article', { class: 'skill-card' });
-
-      const head = el('div', { class: 'skill-card__head' }, [
-        el('h4', { class: 'skill-card__name' }, skill.name || 'Unnamed skill'),
-        el('span', { class: `badge badge--${status}` }, STATUS_LABELS[status] || status),
-      ]);
-      card.appendChild(head);
-
-      if (skill.purpose) {
-        card.appendChild(el('p', { class: 'skill-card__purpose' }, skill.purpose));
-      }
-
-      const triggers = Array.isArray(skill.trigger_phrases) ? skill.trigger_phrases.filter(Boolean) : [];
-      if (triggers.length) {
-        card.appendChild(el('p', { class: 'skill-card__triggers-label' }, 'Use this when'));
-        const list = el('ul', { class: 'skill-card__triggers' });
-        for (const t of triggers) list.appendChild(el('li', {}, t));
-        card.appendChild(list);
-      }
-
-      const domainLabel = (DOMAIN_CONFIG[skill.domain] && DOMAIN_CONFIG[skill.domain].label) || skill.domain || '';
-      const foot = el('div', { class: 'skill-card__foot' });
-      foot.appendChild(el('span', { class: 'skill-card__domain-tag' }, domainLabel));
-      if (skill.added_date) {
-        foot.appendChild(el('span', {}, `Added ${formatDate(skill.added_date)}`));
-      }
-      card.appendChild(foot);
-
-      return card;
-    }
-
-    // ============================================================
-    // Decision trees
-    // ============================================================
-    function renderDecisionTrees(trees) {
-      const root = $('#decision-trees-content');
-      root.innerHTML = '';
-
-      if (!trees.length) {
-        root.appendChild(emptyState({
-          title: 'No comparisons published yet.',
-          body: 'When two skills overlap, a short comparison will live here to settle which one to use.'
-        }));
-        return;
-      }
-
-      const wrap = el('div', { class: 'tree-list' });
-      for (const tree of trees) {
-        const details = el('details', { class: 'tree-card' });
-        const summary = el('summary', { class: 'tree-card__summary' }, [
-          tree.question || 'Untitled comparison',
-          el('span', { class: 'tree-card__chevron', html:
-            '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5l4 4 4-4"/></svg>'
-          })
-        ]);
-        details.appendChild(summary);
-
-        const body = el('div', { class: 'tree-card__body' });
-        if (tree.context) body.appendChild(el('p', { style: 'color: var(--fg-2); margin: 16px 0 0; font-size: 15px;' }, tree.context));
-
-        const options = Array.isArray(tree.options) ? tree.options : [];
-        if (options.length) {
-          const comp = el('div', { class: 'tree-comparison' });
-          for (const opt of options) {
-            const o = el('div', { class: 'tree-option' });
-            o.appendChild(el('p', { class: 'tree-option__name' }, opt.skill || ''));
-            o.appendChild(el('p', { class: 'tree-option__rule' }, opt.use_when || ''));
-            comp.appendChild(o);
-          }
-          body.appendChild(comp);
-        }
-        details.appendChild(body);
-        wrap.appendChild(details);
-      }
-      root.appendChild(wrap);
-    }
-
-    // ============================================================
-    // Roadmap
-    // ============================================================
-    function renderRoadmap(items) {
-      const root = $('#roadmap-content');
-      root.innerHTML = '';
-
-      if (!items.length) {
-        root.appendChild(emptyState({
-          title: 'Roadmap is being shaped.',
-          body: "What's in design, build, or testing will land here. Updates posted as work moves forward."
-        }));
-        return;
-      }
-
-      // Sort by target date ascending
-      const sorted = [...items].sort((a, b) => {
-        const da = a.target_date || '9999-12-31';
-        const db = b.target_date || '9999-12-31';
-        return da.localeCompare(db);
-      });
-
-      const list = el('div', { class: 'roadmap-list' });
-      for (const item of sorted) {
-        const row = el('div', { class: 'roadmap-item' });
-        row.appendChild(el('span', { class: 'roadmap-item__when' }, formatTargetDate(item.target_date)));
-
-        const main = el('div', { class: 'roadmap-item__main' });
-        main.appendChild(el('h3', {}, item.name || 'Unnamed'));
-        const sub = [];
-        if (item.category) sub.push(item.category);
-        if (item.description) sub.push(item.description);
-        if (sub.length) main.appendChild(el('p', {}, sub.join(' · ')));
-        row.appendChild(main);
-
-        const priority = (item.priority || 'medium').toLowerCase();
-        row.appendChild(el('span', {
-          class: `roadmap-item__priority roadmap-item__priority--${priority}`
-        }, ROADMAP_PRIORITY_LABELS[priority] || priority));
-
-        list.appendChild(row);
-      }
-      root.appendChild(list);
-    }
-
-    // ============================================================
-    // Changelog
-    // ============================================================
-    function renderChangelog(items) {
-      const root = $('#changelog-content');
-      root.innerHTML = '';
-
-      if (!items.length) {
-        root.appendChild(emptyState({
-          title: 'No changes logged yet.',
-          body: 'Library changes will appear here in reverse chronological order.'
-        }));
-        return;
-      }
-
-      const sorted = [...items].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-      const list = el('div', { class: 'changelog-list' });
-      for (const item of sorted) {
-        const type = (item.type || 'updated').toLowerCase();
-        const row = el('div', { class: 'changelog-item' });
-        row.appendChild(el('span', { class: 'changelog-item__date' }, formatDate(item.date)));
-        row.appendChild(el('span', { class: `changelog-item__type changelog-item__type--${type}` }, CHANGELOG_TYPE_LABELS[type] || type));
-        row.appendChild(el('span', { class: 'changelog-item__note' }, item.note || ''));
-        list.appendChild(row);
-      }
-      root.appendChild(list);
-    }
-
-    // ============================================================
-    // Date formatting
-    // ============================================================
-    function formatDate(iso) {
-      if (!iso) return '';
-      const d = new Date(iso + 'T00:00:00');
-      if (isNaN(d.getTime())) return iso;
-      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    }
-
-    function formatTargetDate(iso) {
-      if (!iso) return 'TBD';
-      const d = new Date(iso + 'T00:00:00');
-      if (isNaN(d.getTime())) return iso;
-      return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-    }
-
-    // ============================================================
-    // Init
-    // ============================================================
-    async function init() {
-      const [skills, trees, roadmap, changelog] = await Promise.all([
-        loadJSON('skills.json'),
-        loadJSON('decision-trees.json'),
-        loadJSON('roadmap.json'),
-        loadJSON('changelog.json'),
-      ]);
-
-      renderSkills(skills);
-      renderDecisionTrees(trees);
-      renderRoadmap(roadmap);
-      renderChangelog(changelog);
-    }
-
-    init();
-  </script>
+  <script src="motion.js" defer></script>
 
 </body>
 </html>
